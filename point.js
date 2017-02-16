@@ -1,10 +1,11 @@
-function Point(givenX, givenY, width, height) {
+function Point(givenX, givenY, width, height, initialColor) {
 	return {
 		x: givenX,
 		y: givenY,
 		w: width,
 		h: height,
-		c: color(255, 255, 255),
+		initC: initialColor,
+		c: initialColor || color(360, 100, 50, 1),
 		age: 0,
 
 		draw: function() {
@@ -15,22 +16,15 @@ function Point(givenX, givenY, width, height) {
 		},
 
 		updateColor: function() {
-			var r = red(this.c),
-				g = green(this.c),
-				b = blue(this.c);
+			var h = hue(this.c);
 
-			r += (r * ((this.age + 1) * 0.1));
-			g += (g * ((this.age + 1) * 0.2));
-			b += (b * ((this.age + 1) * 0.3));
-			// r = getRandomInt(0, 255);
-			// g = getRandomInt(0, 255);
-			// b = getRandomInt(0, 255);
-			this.c = color(r % 255, g % 255, b % 255);
+			h += (h + (this.age * 1));
+			this.c = color(h, 100, 100, 1);
 		},
 
 		//http://stackoverflow.com/questions/306316/determine-if-two-rectangles-overlap-each-other
 		collides: function(otherPoint) {
-			var wiggleroom = 3,
+			var wiggleroom = 2,
 			 	myX1 = this.x - (this.w / wiggleroom),
 				myY1 = this.y - (this.h / wiggleroom),
 				myX2 = this.x + (this.w / wiggleroom),

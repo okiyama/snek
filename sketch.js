@@ -1,12 +1,18 @@
-var snek;
+var snek,
+  fruitManager;
 function setup() {
   createCanvas(1000, 600);
+  colorMode(HSB, 360, 100, 100, 1);
   snek = Snake();
+  fruitManager = FruitManager();
 }
 
 function draw() {
-	snek.update();
+  snek.update();
+  var lengthToAdd = fruitManager.update(snek.getHead());
+  snek.addLength(lengthToAdd);
   snek.draw();
+  fruitManager.draw();
 }
 
 function keyPressed() {
