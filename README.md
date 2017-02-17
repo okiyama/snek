@@ -1,4 +1,6 @@
 # snek
+Play now at https://okiyama.github.io/snek/ !
+
 The classic game Snake recreated using p5.js. I got the idea to do this from Dan Shiffman's excellent [Coding Train](https://www.youtube.com/watch?v=AaGK-fj-BAM) Youtube series.
 Though I've avoided watching any of the video so I can solve the problem myself, then compare afterwards.
 
