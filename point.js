@@ -1,15 +1,18 @@
-function Point(givenX, givenY, width, height, initialColor) {
+function Point(givenX, givenY, width, height, initialColor, isStatic) {
 	return {
 		x: givenX,
 		y: givenY,
 		w: width,
 		h: height,
 		initC: initialColor,
+		staticColor: isStatic,
 		c: initialColor || color(360, 100, 50, 1),
 		age: 0,
 
 		draw: function() {
-			this.updateColor();
+			if(!this.staticColor) {
+				this.updateColor();	
+			}
 			fill(this.c);
 			ellipse(this.x, this.y, this.w, this.h);
 			this.age++;
@@ -18,12 +21,21 @@ function Point(givenX, givenY, width, height, initialColor) {
 		updateColor: function() {
 			var h = hue(this.c);
 
-			h += (h + (this.age * 1));
+			h = (this.age * 5);
 			this.c = color(h, 100, 100, 1);
 		},
 
-		//http://stackoverflow.com/questions/306316/determine-if-two-rectangles-overlap-each-other
+		//circular collides. Assumes both points are perfect circles, not oblong ellipses
 		collides: function(otherPoint) {
+			var run = otherPoint.x - this.x,
+				rise = otherPoint.y - this.y,
+				distance = Math.sqrt(run * run + rise * rise);
+
+			return distance <= (this.w / 2) + (otherPoint.w / 2);
+		},
+
+		//http://stackoverflow.com/questions/306316/determine-if-two-rectangles-overlap-each-other
+		boxCollides: function(otherPoint) {
 			var wiggleroom = 2,
 			 	myX1 = this.x - (this.w / wiggleroom),
 				myY1 = this.y - (this.h / wiggleroom),

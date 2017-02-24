@@ -1,9 +1,10 @@
 function FruitManager() {
 	return {
-		lengthPerFruit: 100,
-		fruitSize: 75,
+		lengthPerFruit: 7,
+		fruitSize: 10,
 		myDeliciousFruits: [],
 
+		//Updates the fruit manager by checking if the snake's head has eaten any of its delicious fruit
 		update: function(head) {
 			var numCollisions = this.checkForCollision(head);
 			if(this.myDeliciousFruits.length === 0) {
@@ -36,8 +37,8 @@ function FruitManager() {
 		addFruit: function() {
 			var randX = getRandomInt(0, width),
 				randY = getRandomInt(0, height),
-				fruitColor = color(0, 100, 50, 1);
-			this.myDeliciousFruits.push(Point(randX, randY, this.fruitSize, this.fruitSize, fruitColor));
+				fruitColor = color(0, 100, 100, 1);
+			this.myDeliciousFruits.push(Point(randX, randY, this.fruitSize, this.fruitSize, fruitColor, true));
 		}
 	};
 };

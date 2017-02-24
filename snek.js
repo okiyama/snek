@@ -1,15 +1,16 @@
 function Snake() {
-	var snekFatness = 50;
+	var snekFatness = 40;
 	return {
 		fatness: snekFatness,
-		mySnek: [Point(width/2, height/2, snekFatness, snekFatness)],
-		longness: 50,
+		mySnek: [Point(width/2, height/2, snekFatness, snekFatness, null, false)],
+		longness: 10,
 
-		moveSpeed: 3,
+		moveSpeed: 30,
 		moving: "UP",
 
 		currentlyNotAFailure: true,
 
+		//TODO: Logic on if we've lost belongs in game controller
 		update: function() {
 			if(this.currentlyNotAFailure && this.lost()) {
 				this.stahp();
@@ -24,7 +25,7 @@ function Snake() {
 
 			head.x += this.dX;
 			head.y += this.dY;
-			var newPoint = Point(head.x, head.y, this.fatness, this.fatness);
+			var newPoint = Point(head.x, head.y, this.fatness, this.fatness, null, false);
 			this.mySnek.push(newPoint);
 			this.trimSnek();
 		},
@@ -40,13 +41,14 @@ function Snake() {
 		lost: function() {
 			var snekLength = this.mySnek.length,
 				head = this.getHead(),
-				headFattedness = this.fatness; //This can be based on the width and speed
+				headFattedness = 3; //This can be based on the width and speed
 
 			outsideArena = head.x > width || head.x < 0 || head.y > height || head.y < 0;
 			collidesWithTail = this.mySnek.length > headFattedness && 
 				this.mySnek.slice(0, snekLength - headFattedness).some(function(tail) {
 					return head.collides(tail);
 				});
+
 			return outsideArena || collidesWithTail;
 		},
 
