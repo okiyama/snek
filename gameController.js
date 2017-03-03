@@ -4,6 +4,8 @@ function GameController() {
 		snek: new Snake(),
 		fruitManager: new FruitManager(),
 
+		currentlyNotAFailure: true,
+
 		update: function() {
 			this.snek.update();
 			var lengthToAdd = this.fruitManager.update(this.snek.getHead());
@@ -11,6 +13,19 @@ function GameController() {
 		},
 
 		draw: function() {
+			if(this.currentlyNotAFailure && this.lost()) {
+				this.drawAll();
+				this.snek.stahp();
+				this.showFail();
+				this.currentlyNotAFailure = false;
+			} 
+			if(!this.currentlyNotAFailure) {
+				return;
+			}
+			this.drawAll();
+		},
+
+		drawAll: function() {
 			this.snek.draw();
 			this.fruitManager.draw();
 			this.drawScore(this.getScore());
@@ -30,6 +45,21 @@ function GameController() {
 			} else if (keyCode === 61 || keyCode === 187) { //=
 				this.snek.moveSpeed += 1;
 			}
+		},
+
+		lost: function() {
+			var head = this.snek.getHead();
+
+			outsideArena = head.x + (head.w / 2) > width || head.x - (head.w / 2) < 0 || head.y + (head.h / 2) > height || head.y - (head.h / 2) < 0;
+			collidesWithTail = this.snek.collidesWithTail();
+
+			return outsideArena || collidesWithTail;
+		},
+
+		showFail: function() {
+			textSize(32);
+			fill(0);
+			text("you suck", width/2, height/2);
 		},
 
 		getScore: function() {

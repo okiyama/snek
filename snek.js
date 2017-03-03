@@ -8,18 +8,8 @@ function Snake() {
 		moveSpeed: 30,
 		moving: "UP",
 
-		currentlyNotAFailure: true,
-
-		//TODO: Logic on if we've lost belongs in game controller
+		
 		update: function() {
-			if(this.currentlyNotAFailure && this.lost()) {
-				this.stahp();
-				this.showFail();
-				this.currentlyNotAFailure = false;
-			} 
-			if(!this.currentlyNotAFailure) {
-				return;
-			}
 			this.updateDs();
 			var head = this.getHead();
 
@@ -38,30 +28,22 @@ function Snake() {
 			return this.mySnek[this.mySnek.length - 1];
 		},
 
-		lost: function() {
-			var snekLength = this.mySnek.length,
+		getLength: function() {
+			return this.mySnek.length;
+		},
+
+		collidesWithTail: function() {
+			var snekLength = this.getLength(),
 				head = this.getHead(),
 				headFattedness = 3; //This can be based on the width and speed
 
-			outsideArena = head.x > width || head.x < 0 || head.y > height || head.y < 0;
-			collidesWithTail = this.mySnek.length > headFattedness && 
+			return this.mySnek.length > headFattedness && 
 				this.mySnek.slice(0, snekLength - headFattedness).some(function(tail) {
 					return head.collides(tail);
 				});
-
-			return outsideArena || collidesWithTail;
-		},
-
-		showFail: function() {
-			textSize(32);
-			fill(0);
-			text("you suck", width/2, height/2);
 		},
 
 		draw: function() {
-			if(this.lost()) {
-				return;
-			}
 			this.drawSnek();
 		},
 
