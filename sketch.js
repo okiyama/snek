@@ -1,7 +1,7 @@
 var gameController;
 
 function setup() {
-  frameRate(5);
+  frameRate(60);
   createCanvas(1000, 600);
   colorMode(HSB, 360, 100, 100, 1);
   gameController = new GameController();

@@ -7,7 +7,9 @@ function GameController() {
 		currentlyNotAFailure: true,
 
 		update: function() {
-			this.snek.update();
+			if(frameCount % 10 == 0) {
+				this.snek.update();
+			}
 			var lengthToAdd = this.fruitManager.update(this.snek.getHead());
 			this.snek.addLength(lengthToAdd);
 		},
@@ -26,6 +28,7 @@ function GameController() {
 		},
 
 		drawAll: function() {
+			//Note to self: can do same thing as this.snek.update() for lag-mode
 			this.snek.draw();
 			this.fruitManager.draw();
 			this.drawScore(this.getScore());
@@ -67,7 +70,8 @@ function GameController() {
 
 			textSize(32);
 			fill(0);
-			text(chosenDisappointment, width/2 - (chosenDisappointment.length * 7), height/2);
+			textAlign(CENTER);
+			text(chosenDisappointment, width/2, height/2);
 		},
 
 		getScore: function() {

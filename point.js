@@ -21,7 +21,7 @@ function Point(givenX, givenY, width, height, initialColor, isStatic) {
 		updateColor: function() {
 			var h = hue(this.c);
 
-			h = (this.age * 5);
+			h = (this.age * frameRate() / 120) % 360;
 			this.c = color(h, 100, 100, 1);
 		},
 
