@@ -22,12 +22,3 @@ function keyPressed() {
 //     snek.stahp(); 
 //   }
 // }
-
-/*
- * TODOs:
- *  Draw one more circle before losing
- *  Up then left/right shouldn't lose
- *  Raise framerate but maintain distance between body
- *  Fruit shouldn't spawn too close to edges.
- *  A second type of fruit that adds speed (self worth multiplier) rather than length
- */
