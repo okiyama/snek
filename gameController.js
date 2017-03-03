@@ -57,9 +57,17 @@ function GameController() {
 		},
 
 		showFail: function() {
+			var disappointments = ["you suck", 
+				"i'm disappointed in you",
+				"that didn't seem like it was your best effort",
+				"maybe next time you won't let me down",
+				"this is worse than the spaghetti incident",
+				"just wait until you father hears about this"],
+			chosenDisappointment = disappointments[getRandomInt(0, disappointments.length-1)];
+
 			textSize(32);
 			fill(0);
-			text("you suck", width/2, height/2);
+			text(chosenDisappointment, width/2 - (chosenDisappointment.length * 7), height/2);
 		},
 
 		getScore: function() {
