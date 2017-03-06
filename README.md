@@ -12,3 +12,4 @@ TODO:
 * Other fruit types:  
 	fruit that adds speed (self worth multiplier)   
 	Fruit that affects your movement, maybe by swapping up/down and left/right
+	Fruit that affects size of either the player or the fruit or both. Could also be a sine wave
