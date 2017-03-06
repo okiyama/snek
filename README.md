@@ -7,13 +7,8 @@ Though I've avoided watching any of the video so I can solve the problem myself,
 I'm enjoying p5.js, visual programming is fun and it's amazing how expressive the environment can be. Great way to practice up on my vanilla JS too.
 
 TODO:  
-* Update snek movement to be smooth but not too fast  
-* Figure out what's up with headFattedness
 * Play around with weird movements, like sine waves and what not  
-* Draw one more circle before losing  
-* Up then left/right shouldn't lose  
-* Raise framerate but maintain distance between body  
-* Fruit shouldn't spawn too close to edges.  
+* Up then left/right shouldn't lose. This happens because move(left/right/up/down) use inacurrate "moving" values  
 * Other fruit types:  
 	fruit that adds speed (self worth multiplier)   
 	Fruit that affects your movement, maybe by swapping up/down and left/right

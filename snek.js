@@ -5,7 +5,7 @@ function Snake() {
 		mySnek: [Point(width/2, height/2, snekFatness, snekFatness, null, false)],
 		longness: 10,
 
-		moveSpeed: 30,
+		moveSpeed: 41,
 		moving: "UP",
 
 		
@@ -13,9 +13,9 @@ function Snake() {
 			this.updateDs();
 			var head = this.getHead();
 
-			head.x += this.dX;
-			head.y += this.dY;
-			var newPoint = Point(head.x, head.y, this.fatness, this.fatness, null, false);
+			var newX = head.x + this.dX,
+				newY = head.y + this.dY;
+			var newPoint = Point(newX, newY, this.fatness, this.fatness, null, false);
 			this.mySnek.push(newPoint);
 			this.trimSnek();
 		},
@@ -34,21 +34,16 @@ function Snake() {
 
 		collidesWithTail: function() {
 			var snekLength = this.getLength(),
-				head = this.getHead(),
-				headFattedness = 3; //This can be based on the width and speed
+				head = this.getHead();
 
-			return this.mySnek.length > headFattedness && 
-				this.mySnek.slice(0, snekLength - headFattedness).some(function(tail) {
+			return this.mySnek.length > 1 && 
+				this.mySnek.slice(0, snekLength - 1).some(function(tail) {
 					return head.collides(tail);
 				});
 		},
 
 		draw: function() {
-			this.drawSnek();
-		},
-
-		drawSnek: function() {
-  			background(174, 100, 100, 1);
+			background(174, 100, 100, 1);
 			this.mySnek.forEach(function(point) {
 				point.draw();
 			});

@@ -1,6 +1,5 @@
 function FruitManager() {
 	return {
-		lengthPerFruit: 7,
 		fruitSize: 10,
 		myDeliciousFruits: [],
 
@@ -11,7 +10,7 @@ function FruitManager() {
 				this.addFruit();
 			}
 
-			return numCollisions * this.lengthPerFruit;
+			return numCollisions;
 		},
 
 		draw: function() {
@@ -35,8 +34,8 @@ function FruitManager() {
 		},
 
 		addFruit: function() {
-			var randX = getRandomInt(0, width),
-				randY = getRandomInt(0, height),
+			var randX = getRandomInt(0, width - 50),
+				randY = getRandomInt(0, height - 50),
 				fruitColor = color(0, 100, 100, 1);
 			this.myDeliciousFruits.push(Point(randX, randY, this.fruitSize, this.fruitSize, fruitColor, true));
 		}

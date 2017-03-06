@@ -5,13 +5,18 @@ function GameController() {
 		fruitManager: new FruitManager(),
 
 		currentlyNotAFailure: true,
+		lengthPerFruit: 7,
 
 		update: function() {
-			if(frameCount % 10 == 0) {
+			if(this.isUpdateFrame()) {
 				this.snek.update();
 			}
-			var lengthToAdd = this.fruitManager.update(this.snek.getHead());
-			this.snek.addLength(lengthToAdd);
+			var numFruitEt = this.fruitManager.update(this.snek.getHead());
+			this.snek.addLength(numFruitEt * this.lengthPerFruit);
+		},
+
+		isUpdateFrame: function() {
+			return frameCount % 20 == 0;
 		},
 
 		draw: function() {
