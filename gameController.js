@@ -16,7 +16,7 @@ function GameController() {
 		},
 
 		isUpdateFrame: function() {
-			return frameCount % 20 == 0;
+			return frameCount % 5 == 0;
 		},
 
 		draw: function() {
